@@ -29,3 +29,7 @@ export interface Property {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface PropertyProps {
+  property: Property;
+}

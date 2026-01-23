@@ -7,11 +7,7 @@ import {
   FaMoneyBill,
   FaMapMarker,
 } from 'react-icons/fa';
-import type { Property } from '@/app/types/property';
-
-interface PropertyProps {
-  property: Property;
-}
+import { PropertyProps } from '@/app/types/property';
 
 const PropertyCard = ({ property }: PropertyProps) => {
   const getRateDisplay = (): string | null => {
