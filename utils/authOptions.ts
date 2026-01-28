@@ -42,7 +42,7 @@ export const authOptions: AuthOptions = {
       return true;
     },
     // Session callback function that modifies the session object
-    async session({ session, user, token }) {
+    async session({ session }) {
       // 1. Get user from database
       if (session.user?.email) {
         const dbUser = await User.findOne({
