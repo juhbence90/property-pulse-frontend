@@ -6,9 +6,14 @@ import { Property } from '@/app/types/property';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
+import mongoose from 'mongoose';
 
 const PropertyPage = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return notFound();
+  }
 
   await connectDB();
   const property = await PropertyModel.findById(id).lean<Property>();
