@@ -4,10 +4,10 @@ import PropertyModel from '@/models/Property';
 import { getSessionUser } from '@/utils/getSessionUser';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import cloudinary from '@/config/cloudinary';
 
 export async function addProperty(formData: FormData): Promise<void> {
   await connectDB();
-
   const sessionUser = await getSessionUser();
 
   if (!sessionUser || !sessionUser.userId) {
@@ -21,8 +21,28 @@ export async function addProperty(formData: FormData): Promise<void> {
     .getAll('images')
     .filter(
       (image): image is File => image instanceof File && image.name !== '',
-    )
-    .map((image) => image.name);
+    );
+
+  const imageUrls: string[] = [];
+
+  for (const imageFile of images) {
+    const imageBuffer = await imageFile.arrayBuffer();
+    const imageArray = Array.from(new Uint8Array(imageBuffer));
+    const imageData = Buffer.from(imageArray);
+
+    // Convert to base64
+    const imageBase64 = imageData.toString('base64');
+
+    //Make request to cloudinary
+    const result = await cloudinary.uploader.upload(
+      `data:image/png;base64,${imageBase64}`,
+      {
+        folder: 'propertypulse',
+      },
+    );
+
+    imageUrls.push(result.secure_url);
+  }
 
   const propertyData = {
     owner: userId,
@@ -49,10 +69,7 @@ export async function addProperty(formData: FormData): Promise<void> {
       email: formData.get('seller_info.email') as string,
       phone: formData.get('seller_info.phone') as string,
     },
-    images,
-    is_featured: false,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+    images: imageUrls,
   };
 
   const newProperty = new PropertyModel(propertyData);
