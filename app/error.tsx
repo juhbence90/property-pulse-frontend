@@ -4,7 +4,11 @@ import Link from 'next/link';
 import { FaExclamationCircle } from 'react-icons/fa';
 
 interface ErrorPageProps {
-  error: Error;
+  error: {
+    message: string;
+    digest?: string;
+  };
+  reset: () => void;
 }
 
 const ErrorPage = ({ error }: ErrorPageProps) => {
