@@ -3,11 +3,11 @@ import PropertyDetails from '@/components/PropertyDetails';
 import PropertyImages from '@/components/PropertyImages';
 import connectDB from '@/config/database';
 import PropertyModel from '@/models/Property';
-import { Property } from '@/app/types/property';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
 import mongoose from 'mongoose';
+import { convertToSerializableObject } from '@/utils/convertToObject';
 
 const PropertyPage = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
@@ -17,7 +17,8 @@ const PropertyPage = async ({ params }: { params: { id: string } }) => {
   }
 
   await connectDB();
-  const property = await PropertyModel.findById(id).lean<Property>();
+  const propertyDoc = await PropertyModel.findById(id).lean();
+  const property = convertToSerializableObject(propertyDoc);
 
   if (!property) {
     notFound();
