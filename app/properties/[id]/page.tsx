@@ -1,6 +1,9 @@
 import PropertyHeaderImage from '@/components/PropertyHeaderImage';
 import PropertyDetails from '@/components/PropertyDetails';
 import PropertyImages from '@/components/PropertyImages';
+import BookmarkButton from '@/components/BookmarkButton';
+import ShareButtons from '@/components/ShareButtons';
+import PropertyContactForm from '@/components/PropertyContactForm';
 import connectDB from '@/config/database';
 import PropertyModel from '@/models/Property';
 import { notFound } from 'next/navigation';
@@ -41,6 +44,11 @@ const PropertyPage = async ({ params }: { params: { id: string } }) => {
         <div className="container m-auto py-10 px-6">
           <div className="grid grid-cols-1 md:grid-cols-[7fr_3fr] w-full gap-6">
             <PropertyDetails property={property} />
+            <aside className="space-y-4">
+              <BookmarkButton property={property} />
+              <ShareButtons property={property} />
+              <PropertyContactForm property={property} />
+            </aside>
           </div>
         </div>
       </section>
