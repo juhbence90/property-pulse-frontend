@@ -1,4 +1,4 @@
-import type { PropertyProps } from '@/app/types/property';
+import type { PropertyProps } from '@/models/Property';
 import { FaPaperPlane } from 'react-icons/fa';
 
 const PropertyContactForm = ({ property }: PropertyProps) => {

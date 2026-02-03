@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { setDefaults, fromAddress, OutputFormat } from 'react-geocode';
-import type { PropertyProps } from '@/app/types/property';
+import type { PropertyProps } from '@/models/Property';
 import Map, { Marker } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Image from 'next/image';

@@ -2,9 +2,10 @@ import PropertyCard from '@/components/PropertyCard';
 import connectDB from '@/config/database';
 import User from '@/models/User';
 import { getSessionUser } from '@/utils/getSessionUser';
-import type { Property } from '@/app/types/property';
+import type { IProperty } from '@/models/Property';
 
 const SavedPropertiesPage = async () => {
+  await connectDB();
   const user = await getSessionUser();
 
   if (!user) {
@@ -23,8 +24,8 @@ const SavedPropertiesPage = async () => {
           <p>No saved properties.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {bookmarks.map((property: Property) => (
-              <PropertyCard key={property._id} property={property} />
+            {bookmarks.map((property: IProperty) => (
+              <PropertyCard key={property._id.toString()} property={property} />
             ))}
           </div>
         )}

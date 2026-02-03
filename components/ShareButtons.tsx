@@ -9,7 +9,7 @@ import {
   WhatsappIcon,
   EmailIcon,
 } from 'react-share';
-import type { PropertyProps } from '@/app/types/property';
+import type { PropertyProps } from '@/models/Property';
 
 const ShareButtons = ({ property }: PropertyProps) => {
   const shareUrl = `${process.env.NEXT_PUBLIC_DOMAIN}/properties/${property._id}`;

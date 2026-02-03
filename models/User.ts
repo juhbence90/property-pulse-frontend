@@ -1,6 +1,15 @@
-import { Schema, model, models, Types } from 'mongoose';
+import { Schema, model, models, Types, Document } from 'mongoose';
 
-const UserSchema = new Schema(
+export interface IUser extends Document {
+  username: string;
+  email: string;
+  image?: string;
+  bookmarks: Types.ObjectId[];
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+const UserSchema = new Schema<IUser>(
   {
     email: {
       type: String,

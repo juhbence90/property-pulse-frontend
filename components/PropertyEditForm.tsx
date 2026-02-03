@@ -1,5 +1,5 @@
 import updateProperty from '@/app/actions/updateProperty';
-import type { PropertyProps } from '@/app/types/property';
+import type { PropertyProps } from '@/models/Property';
 
 const PropertyEditForm = ({ property }: PropertyProps) => {
   const updatePropertyById = updateProperty.bind(null, property._id);
@@ -152,7 +152,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               name="amenities"
               value="Wifi"
               className="mr-2"
-              defaultChecked={property.amenities.includes('Wifi')}
+              defaultChecked={property.amenities?.includes('Wifi')}
             />
             <label htmlFor="amenity_wifi">Wifi</label>
           </div>
@@ -162,7 +162,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="amenity_kitchen"
               name="amenities"
               value="Full kitchen"
-              defaultChecked={property.amenities.includes('Full kitchen')}
+              defaultChecked={property.amenities?.includes('Full kitchen')}
               className="mr-2"
             />
             <label htmlFor="amenity_kitchen">Full kitchen</label>
@@ -173,7 +173,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="amenity_washer_dryer"
               name="amenities"
               value="Washer & Dryer"
-              defaultChecked={property.amenities.includes('Washer & Dryer')}
+              defaultChecked={property.amenities?.includes('Washer & Dryer')}
               className="mr-2"
             />
             <label htmlFor="amenity_washer_dryer">Washer & Dryer</label>
@@ -184,7 +184,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="amenity_free_parking"
               name="amenities"
               value="Free Parking"
-              defaultChecked={property.amenities.includes('Free Parking')}
+              defaultChecked={property.amenities?.includes('Free Parking')}
               className="mr-2"
             />
             <label htmlFor="amenity_free_parking">Free Parking</label>
@@ -195,7 +195,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="amenity_pool"
               name="amenities"
               value="Swimming Pool"
-              defaultChecked={property.amenities.includes('Swimming Pool')}
+              defaultChecked={property.amenities?.includes('Swimming Pool')}
               className="mr-2"
             />
             <label htmlFor="amenity_pool">Swimming Pool</label>
@@ -206,7 +206,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="amenity_hot_tub"
               name="amenities"
               value="Hot Tub"
-              defaultChecked={property.amenities.includes('Hot Tub')}
+              defaultChecked={property.amenities?.includes('Hot Tub')}
               className="mr-2"
             />
             <label htmlFor="amenity_hot_tub">Hot Tub</label>
@@ -217,7 +217,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="amenity_24_7_security"
               name="amenities"
               value="24/7 Security"
-              defaultChecked={property.amenities.includes('24/7 Security')}
+              defaultChecked={property.amenities?.includes('24/7 Security')}
               className="mr-2"
             />
             <label htmlFor="amenity_24_7_security">24/7 Security</label>
@@ -228,7 +228,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="amenity_wheelchair_accessible"
               name="amenities"
               value="Wheelchair Accessible"
-              defaultChecked={property.amenities.includes(
+              defaultChecked={property.amenities?.includes(
                 'Wheelchair Accessible',
               )}
               className="mr-2"
@@ -243,7 +243,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="amenity_elevator_access"
               name="amenities"
               value="Elevator Access"
-              defaultChecked={property.amenities.includes('Elevator Access')}
+              defaultChecked={property.amenities?.includes('Elevator Access')}
               className="mr-2"
             />
             <label htmlFor="amenity_elevator_access">Elevator Access</label>
@@ -254,7 +254,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="amenity_dishwasher"
               name="amenities"
               value="Dishwasher"
-              defaultChecked={property.amenities.includes('Dishwasher')}
+              defaultChecked={property.amenities?.includes('Dishwasher')}
               className="mr-2"
             />
             <label htmlFor="amenity_dishwasher">Dishwasher</label>
@@ -265,7 +265,9 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="amenity_gym_fitness_center"
               name="amenities"
               value="Gym/Fitness Center"
-              defaultChecked={property.amenities.includes('Gym/Fitness Center')}
+              defaultChecked={property.amenities?.includes(
+                'Gym/Fitness Center',
+              )}
               className="mr-2"
             />
             <label htmlFor="amenity_gym_fitness_center">
@@ -278,7 +280,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="amenity_air_conditioning"
               name="amenities"
               value="Air Conditioning"
-              defaultChecked={property.amenities.includes('Air Conditioning')}
+              defaultChecked={property.amenities?.includes('Air Conditioning')}
               className="mr-2"
             />
             <label htmlFor="amenity_air_conditioning">Air Conditioning</label>
@@ -289,7 +291,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="amenity_balcony_patio"
               name="amenities"
               value="Balcony/Patio"
-              defaultChecked={property.amenities.includes('Balcony/Patio')}
+              defaultChecked={property.amenities?.includes('Balcony/Patio')}
               className="mr-2"
             />
             <label htmlFor="amenity_balcony_patio">Balcony/Patio</label>
@@ -300,7 +302,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="amenity_smart_tv"
               name="amenities"
               value="Smart TV"
-              defaultChecked={property.amenities.includes('Smart TV')}
+              defaultChecked={property.amenities?.includes('Smart TV')}
               className="mr-2"
             />
             <label htmlFor="amenity_smart_tv">Smart TV</label>
@@ -311,7 +313,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="amenity_coffee_maker"
               name="amenities"
               value="Coffee Maker"
-              defaultChecked={property.amenities.includes('Coffee Maker')}
+              defaultChecked={property.amenities?.includes('Coffee Maker')}
               className="mr-2"
             />
             <label htmlFor="amenity_coffee_maker">Coffee Maker</label>
@@ -333,7 +335,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               id="weekly_rate"
               name="rates.weekly"
               className="border rounded w-full py-2 px-3"
-              defaultValue={property.rates.weekly}
+              defaultValue={property.rates?.weekly}
             />
           </div>
           <div className="flex items-center">
@@ -344,7 +346,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               type="number"
               id="monthly_rate"
               name="rates.monthly"
-              defaultValue={property.rates.monthly}
+              defaultValue={property.rates?.monthly}
               className="border rounded w-full py-2 px-3"
             />
           </div>
@@ -356,7 +358,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
               type="number"
               id="nightly_rate"
               name="rates.nightly"
-              defaultValue={property.rates.nightly}
+              defaultValue={property.rates?.nightly}
               className="border rounded w-full py-2 px-3"
             />
           </div>
@@ -375,7 +377,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
           id="seller_name"
           name="seller_info.name"
           className="border rounded w-full py-2 px-3"
-          defaultValue={property.seller_info.name}
+          defaultValue={property.seller_info?.name}
           placeholder="Name"
         />
       </div>
@@ -392,7 +394,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
           name="seller_info.email"
           className="border rounded w-full py-2 px-3"
           placeholder="Email address"
-          defaultValue={property.seller_info.email}
+          defaultValue={property.seller_info?.email}
           required
         />
       </div>
@@ -408,7 +410,7 @@ const PropertyEditForm = ({ property }: PropertyProps) => {
           id="seller_phone"
           name="seller_info.phone"
           className="border rounded w-full py-2 px-3"
-          defaultValue={property.seller_info.phone}
+          defaultValue={property.seller_info?.phone}
           placeholder="Phone"
         />
       </div>

@@ -2,7 +2,6 @@ import PropertyCard from './PropertyCard';
 import Link from 'next/link';
 import connectDB from '@/config/database';
 import PropertyModel from '@/models/Property';
-import type { Property } from '@/app/types/property';
 
 const HomeProperties = async () => {
   await connectDB();
@@ -10,7 +9,7 @@ const HomeProperties = async () => {
   const recentProperties = await PropertyModel.find({})
     .sort({ createdAt: -1 })
     .limit(3)
-    .lean<Property[]>();
+    .lean();
 
   return (
     <>

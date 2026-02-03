@@ -1,6 +1,41 @@
-import { Schema, model, models } from 'mongoose';
+import { Schema, model, models, Types, Document } from 'mongoose';
 
-const PropertySchema = new Schema(
+export interface IProperty extends Document {
+  owner: Types.ObjectId;
+  name: string;
+  type: string;
+  description?: string;
+  location: {
+    street?: string;
+    city?: string;
+    state?: string;
+    zipcode?: string;
+  };
+  beds: number;
+  baths: number;
+  square_feet: number;
+  amenities: string[];
+  rates: {
+    nightly: number;
+    weekly: number;
+    monthly: number;
+  };
+  seller_info: {
+    name: string;
+    email: string;
+    phone: string;
+  };
+  images: string[];
+  is_featured?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface PropertyProps {
+  property: IProperty;
+}
+
+const PropertySchema = new Schema<IProperty>(
   {
     owner: {
       type: Schema.Types.ObjectId,
@@ -39,21 +74,23 @@ const PropertySchema = new Schema(
     amenities: [
       {
         type: String,
+        default: [],
       },
     ],
     rates: {
-      nightly: Number,
-      weekly: Number,
-      monthly: Number,
+      nightly: { type: Number, default: 0 },
+      weekly: { type: Number, default: 0 },
+      monthly: { type: Number, default: 0 },
     },
     seller_info: {
-      name: String,
-      email: String,
-      phone: String,
+      name: { type: String, default: '' },
+      email: { type: String, default: '' },
+      phone: { type: String, default: '' },
     },
     images: [
       {
         type: String,
+        default: [],
       },
     ],
     is_featured: {

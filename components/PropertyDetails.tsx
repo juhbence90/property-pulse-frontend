@@ -1,4 +1,4 @@
-import { PropertyProps } from '@/app/types/property';
+import type { PropertyProps } from '@/models/Property';
 import {
   FaTimes,
   FaBed,

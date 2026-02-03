@@ -4,8 +4,9 @@ import PropertyModel from '@/models/Property';
 import { getSessionUser } from '@/utils/getSessionUser';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { Types } from 'mongoose';
 
-async function updateProperty(propertyId: string, formData: FormData) {
+async function updateProperty(propertyId: Types.ObjectId, formData: FormData) {
   await connectDB();
   const sessionUser = await getSessionUser();
 
