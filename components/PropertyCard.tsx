@@ -7,19 +7,19 @@ import {
   FaMoneyBill,
   FaMapMarker,
 } from 'react-icons/fa';
-import { PropertyProps } from '@/app/types/property';
+import type { PropertyProps } from '@/models/Property';
 
 const PropertyCard = ({ property }: PropertyProps) => {
   const getRateDisplay = (): string | null => {
     const { rates } = property;
 
-    if (rates.monthly) {
+    if (rates?.monthly) {
       return `$${rates.monthly.toLocaleString()}/mo`;
     }
-    if (rates.weekly) {
+    if (rates?.weekly) {
       return `$${rates.weekly.toLocaleString()}/wk`;
     }
-    if (rates.nightly) {
+    if (rates?.nightly) {
       return `$${rates.nightly.toLocaleString()}/night`;
     }
 
@@ -29,7 +29,7 @@ const PropertyCard = ({ property }: PropertyProps) => {
   return (
     <div className="rounded-xl shadow-md relative">
       <Image
-        src={property.images[0]}
+        src={property.images?.[0] || '/placeholder.jpg'}
         alt=""
         width="0"
         height="0"

@@ -13,7 +13,7 @@ const connectDB = async () => {
 
   //Connect to MongoDB
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(process.env.MONGODB_URI!);
     connected = true;
   } catch (error) {
     console.log(error);

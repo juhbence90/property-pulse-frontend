@@ -4,13 +4,14 @@ import { useState, useEffect } from 'react';
 import bookmarkProperty from '@/app/actions/bookmarkProperty';
 import checkBookmarkStatus from '@/app/actions/checkBookmarkStatus';
 import { toast } from 'react-toastify';
-import type { PropertyProps } from '@/app/types/property';
+import type { PropertyProps } from '@/models/Property';
 import { FaBookmark } from 'react-icons/fa';
 import { useSession } from 'next-auth/react';
 
 const BookmarkButton = ({ property }: PropertyProps) => {
   const { data: session } = useSession();
   const userId = session?.user?.id;
+  const id = property._id.toString();
 
   const [isBookmarked, setIsBookmarked] = useState(false);
 
@@ -21,7 +22,7 @@ const BookmarkButton = ({ property }: PropertyProps) => {
 
     const fetchBookmarkStatus = async () => {
       try {
-        const res = await checkBookmarkStatus(property._id);
+        const res = await checkBookmarkStatus(id);
 
         if (res.error) toast.error(res.error);
         if (res.isBookmarked) setIsBookmarked(res.isBookmarked);
@@ -35,7 +36,7 @@ const BookmarkButton = ({ property }: PropertyProps) => {
     };
 
     fetchBookmarkStatus();
-  }, [property._id, userId]);
+  }, [id, userId]);
 
   const handleClick = async () => {
     if (!userId) {
@@ -44,7 +45,7 @@ const BookmarkButton = ({ property }: PropertyProps) => {
     }
 
     try {
-      const res = await bookmarkProperty(property._id);
+      const res = await bookmarkProperty(id);
 
       setIsBookmarked(res.isBookmarked);
       toast.success(res.message);

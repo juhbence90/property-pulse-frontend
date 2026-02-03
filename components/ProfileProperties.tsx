@@ -3,11 +3,11 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
-import type { Property } from '@/app/types/property';
+import type { IProperty } from '@/models/Property';
 import deleteProperty from '@/app/actions/deleteProperty';
 
 interface ProfilePropertiesProps {
-  properties: Property[];
+  properties: IProperty[];
 }
 
 const ProfileProperties = ({
@@ -25,7 +25,7 @@ const ProfileProperties = ({
     await deleteProperty(propertyId);
 
     const updatedProperties = properties.filter(
-      (property) => property._id !== propertyId,
+      (property) => property._id.toString() !== propertyId,
     );
 
     setProperties(updatedProperties);
@@ -34,7 +34,7 @@ const ProfileProperties = ({
   };
 
   return properties.map((property) => (
-    <div key={property._id} className="mb-10">
+    <div key={property._id.toString()} className="mb-10">
       <Link href={`/properties/${property._id}`}>
         <Image
           className="h-32 w-full rounded-md object-cover"
@@ -61,7 +61,7 @@ const ProfileProperties = ({
         <button
           className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600"
           type="button"
-          onClick={() => handleDeleteProperty(property._id)}
+          onClick={() => handleDeleteProperty(property._id.toString())}
         >
           Delete
         </button>
