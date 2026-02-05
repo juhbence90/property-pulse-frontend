@@ -2,6 +2,7 @@ import PropertyCard from './PropertyCard';
 import Link from 'next/link';
 import connectDB from '@/config/database';
 import PropertyModel from '@/models/Property';
+import type { IProperty } from '@/models/Property';
 
 const HomeProperties = async () => {
   await connectDB();
@@ -9,7 +10,7 @@ const HomeProperties = async () => {
   const recentProperties = await PropertyModel.find({})
     .sort({ createdAt: -1 })
     .limit(3)
-    .lean();
+    .lean<IProperty[]>();
 
   return (
     <>
@@ -23,7 +24,10 @@ const HomeProperties = async () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {recentProperties.map((property) => (
-                <PropertyCard key={property._id} property={property} />
+                <PropertyCard
+                  key={property._id.toString()}
+                  property={property}
+                />
               ))}
             </div>
           )}

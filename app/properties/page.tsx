@@ -1,11 +1,11 @@
 import PropertyCard from '@/components/PropertyCard';
 import connectDB from '@/config/database';
-import type { Property } from '@/app/types/property';
 import PropertyModel from '@/models/Property';
+import type { IProperty } from '@/models/Property';
 
 const PropertiesPage = async () => {
   await connectDB();
-  const properties = await PropertyModel.find({}).lean<Property[]>();
+  const properties = await PropertyModel.find({}).lean<IProperty[]>();
 
   return (
     <section className="px-4 py-6">
@@ -15,7 +15,7 @@ const PropertiesPage = async () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {properties.map((property) => (
-              <PropertyCard key={property._id} property={property} />
+              <PropertyCard key={property._id.toString()} property={property} />
             ))}
           </div>
         )}
