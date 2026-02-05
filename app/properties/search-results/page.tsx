@@ -41,9 +41,11 @@ const SearchResultsPage = async ({ searchParams }: SearchResultsPageProps) => {
     query.type = typePattern;
   }
 
-  const propertiesQueryResults = await PropertyModel.find(query).lean();
-  const properties = convertToSerializableObject(propertiesQueryResults);
-  console.log(properties);
+  const propertiesQueryResults =
+    await PropertyModel.find(query).lean<IProperty[]>();
+  const properties: IProperty[] = propertiesQueryResults.map((doc) =>
+    convertToSerializableObject<IProperty>(doc),
+  );
 
   return (
     <>
@@ -66,7 +68,7 @@ const SearchResultsPage = async ({ searchParams }: SearchResultsPageProps) => {
             <p>No search results</p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {properties.map((property: IProperty) => (
+              {properties.map((property) => (
                 <PropertyCard
                   key={property._id.toString()}
                   property={property}

@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
 import mongoose from 'mongoose';
 import { convertToSerializableObject } from '@/utils/convertToObject';
+import type { IProperty } from '@/models/Property';
 
 const PropertyPage = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
@@ -20,12 +21,13 @@ const PropertyPage = async ({ params }: { params: { id: string } }) => {
   }
 
   await connectDB();
-  const propertyDoc = await PropertyModel.findById(id).lean();
-  const property = convertToSerializableObject(propertyDoc);
+  const propertyDoc = await PropertyModel.findById(id).lean<IProperty>();
 
-  if (!property) {
+  if (!propertyDoc) {
     notFound();
   }
+
+  const property = convertToSerializableObject(propertyDoc);
 
   return (
     <>

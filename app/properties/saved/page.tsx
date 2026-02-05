@@ -14,7 +14,13 @@ const SavedPropertiesPage = async () => {
 
   const { userId } = user;
 
-  const { bookmarks } = await User.findById(userId).populate('bookmarks');
+  const userDoc = await User.findById(userId).populate('bookmarks');
+
+  if (!userDoc) {
+    throw new Error('User not found');
+  }
+
+  const bookmarks = userDoc.bookmarks as unknown as IProperty[];
 
   return (
     <section className="px-4 py-6">
@@ -24,7 +30,7 @@ const SavedPropertiesPage = async () => {
           <p>No saved properties.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {bookmarks.map((property: IProperty) => (
+            {bookmarks.map((property) => (
               <PropertyCard key={property._id.toString()} property={property} />
             ))}
           </div>
