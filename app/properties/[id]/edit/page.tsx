@@ -3,12 +3,13 @@ import connectDB from '@/config/database';
 import PropertyModel from '@/models/Property';
 import { convertToSerializableObject } from '@/utils/convertToObject';
 import { notFound } from 'next/navigation';
+import type { IProperty } from '@/models/Property';
 
 const PropertyEditPage = async ({ params }: { params: { id: string } }) => {
   await connectDB();
   const { id } = await params;
 
-  const propertyDoc = await PropertyModel.findById(id).lean();
+  const propertyDoc = await PropertyModel.findById(id).lean<IProperty>();
 
   if (!propertyDoc) {
     notFound();
